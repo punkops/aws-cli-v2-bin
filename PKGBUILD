@@ -7,7 +7,7 @@ pkgrel=1
 epoch=1
 pkgdesc='Unified command line interface for Amazon Web Services (version 2) (binary release)'
 arch=(x86_64 aarch64)
-url='https://aws.amazon.com/cli/'
+url='https://github.com/aws/aws-cli/tree/v2'
 license=('Apache')
 depends=()
 optdepends=()
@@ -16,10 +16,12 @@ conflicts=(aws-cli aws-cli-v2)
 install=aws-cli-v2-bin.install
 
 source=("aws_bash_completer"
-        "aws_zsh_completer.sh")
+        "aws_zsh_completer.sh"
+		"LICENSE.txt::https://raw.githubusercontent.com/aws/aws-cli/v2/LICENSE.txt")
 
 sha256sums=('451a681062516a0473c8764a6593b0a65b6e558bf6128899b1d5e19b258f679e'
-            '426e99f1e8cd00cce9263693d29ceac5b4834f6cf1766cd57b985a440eea2e87')
+            '426e99f1e8cd00cce9263693d29ceac5b4834f6cf1766cd57b985a440eea2e87'
+			'a395e1165c2ed0e2bf041ae28e528245aedd4009b7e94ad407780257f704afc1')
 
 source_x86_64=(${pkgname}-${pkgver}-x86_64.zip::https://awscli.amazonaws.com/awscli-exe-linux-x86_64-${pkgver}.zip)
 source_aarch64=(${pkgname}-${pkgver}-aarch64.zip::https://awscli.amazonaws.com/awscli-exe-linux-aarch64-${pkgver}.zip)
@@ -35,6 +37,7 @@ package() {
   	mv aws/dist $pkgdir/usr/local/aws-cli/v2
 	install -Dm644 aws_bash_completer $pkgdir/usr/share/bash-completion/completions/aws
 	install -Dm644 aws_zsh_completer.sh $pkgdir/usr/bin/aws_zsh_completer.sh
+	install -Dm 644 LICENSE.txt "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
 	ln -sf /usr/local/aws-cli/v2/aws $pkgdir/usr/bin/aws
 	ln -sf /usr/local/aws-cli/v2/aws_completer $pkgdir/usr/bin/aws_completer
 }

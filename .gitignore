@@ -9,6 +9,7 @@
 *.log.*
 *.sig
 *.zst
+/LICENSE.txt
 
 pkg/
 src/
